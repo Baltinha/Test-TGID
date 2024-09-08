@@ -38,9 +38,9 @@ public class TestTGID {
     public static void SistemaCliente() {
 
         System.out.println("\t Escolha a opcao desejada");
-        System.out.println("1 - Sacar");
-        System.out.println("2 - Depositar");
-        System.out.println("3 - Voltar\n");
+        System.out.println("Sacar digite 1");
+        System.out.println("Depositar digite 2");
+        System.out.println("Voltar digite 3\n");
         System.out.print("Opcao: ");
 
     }
@@ -70,7 +70,7 @@ public class TestTGID {
                     System.out.println("Não existe uma empresa com o CNPJ ecolhido!");
                     escolheOpcao(2);
                 }
-                System.out.println("Quanto voce quer depositar? ");
+                System.out.println("Quanto voce quer depositar?");
                 double deposito = ler.nextDouble();
                 empresaTemp.depositar(deposito);
                 break;
@@ -93,6 +93,7 @@ public class TestTGID {
 
         switch (sistema) {
             case 1:
+                //informar CPF para montar a empresa
                 System.out.println("Informe o CPF: ");
                 CPF = ler.next();
                 if (ValidaCPF.isCPF(CPF) == true) {
@@ -105,7 +106,7 @@ public class TestTGID {
 
                 break;
             case 2:
-
+                //informar CNPJ para montar a empresa
                 System.out.println("Informe o CNPJ: ");
                 CNPJ = ler.next();
                 if (ValidaCNPJ.isCNPJ(CNPJ) == true) {
@@ -151,6 +152,7 @@ public class TestTGID {
     }
 
     public static void adicionarEmpresa(Empresas empresa) {
+        //index para popular a array de empresas
         if (index < 5) {
             empresas[index] = empresa;
             index = index + 1;
@@ -164,7 +166,7 @@ public class TestTGID {
     }
 
     public static Empresas selecionaEmpresa(String CNPJ) {
-
+        //seleciona e empresa para ver o CNPJ para poder sacar ou depositar
         Empresas empresaSelecionada = null;
         for (int i = 0; i < empresas.length; i++) {
 
