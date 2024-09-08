@@ -13,7 +13,8 @@ import MeuPacote.Empresas;
  * @author nomed
  */
 public class TestTGID {
-
+    
+    static int index =0; 
     static Empresas[] empresas = new Empresas[5];
     static Scanner ler = new Scanner(System.in);
     
@@ -30,11 +31,36 @@ public class TestTGID {
         System.out.println("\tMostrar Empresas digeite 3");
         System.out.println("\tFechar digeite 4");
         System.out.print("Opcao: ");
-        int sistema = ler.nextInt();
+        int sistema = ler.nextInt();    
+        Sistema(sistema);
         
-             
-            Sistema(sistema);
-        
+    }
+        public static void escolheOpcao(int opcao){
+
+            switch( opcao ){
+                case 1: 
+                    System.out.println("Saque");
+
+
+                case 2:
+                    System.out.println("deposito");
+
+
+                case 3:
+                        SistemaInicial();
+                        break;
+                default:
+                        System.out.println("Opção inválida");
+            }
+    }
+    public static void SistemaCliente() {
+
+        System.out.println("\t Escolha a opcao desejada");
+        System.out.println("1 - Sacar");
+        System.out.println("2 - Depositar");
+        System.out.println("3 - Voltar\n");
+        System.out.print("Opcao: ");  
+ 
     }
     public static void Sistema(int sistema)
     {
@@ -51,11 +77,13 @@ public class TestTGID {
             case 1:
                 System.out.println("Informe o CPF: ");
                     CPF = ler.next();
-                /*if (ValidaCPF.isCPF(CPF) == true) {
-                    System.out.print("Um cliente");
+                if (ValidaCPF.isCPF(CPF) == true) {
+                SistemaCliente();
+                int clienteTemp = ler.nextInt();
+                escolheOpcao(clienteTemp);
                 } else {
                     System.out.printf("Erro, CPF invalido !!!\n");
-                }*/
+                }
 
                 break;
             case 2:
@@ -69,6 +97,7 @@ public class TestTGID {
                 taxa = ler.nextFloat();
                 System.out.println("Infome a saldo: ");
                 saldo = ler.nextInt();
+                
                 FazerEmpresas(num,CNPJ,taxa,saldo);
                 System.out.println("Quer colocar mais uma empresa");
                 System.out.print(" 1 pra sim e 2 pra nao: ");
@@ -80,36 +109,44 @@ public class TestTGID {
                 else System.out.printf("Erro, CNPJ invalido !!!\n");
                 break;
             case 3:
-                
-                for (int i = 0; i < empresas.length; i++) {
-                    if (empresas[0] == null)
-                    {
-                        System.out.println("Nao existem empresas cadastradas!");
-                        break;
-                    }
-                    if (empresas[i] == null) {
-                        return;
-                    }
-                    empresas[i].printEmpresa();
+
+            for (Empresas empresa : empresas) {
+                if (empresas[0] == null)
+                {
+                    System.out.println("Nao existem empresas cadastradas!");
+                    break;
                 }
-                 
+                if (empresa == null) {
+                    return;
+                }
+                empresa.printEmpresa();
+            }
+
                 break;
+
                 
         }
         SistemaInicial(); 
     }
- 
+    public static void adicionarEmpresa(Empresas empresa)
+    {
+        if (index < 5) {
+            empresas[index] = empresa;
+            index = index+1;
+        }
+    }
     public static void FazerEmpresas(int num, String CNPJ, float taxa,int saldo)
     {
-        Empresas novaEmpresa = new Empresas(num, CNPJ,taxa,saldo);
-        for (int i = 0; i < empresas.length; i++) {
-            if(empresas[i] == null)
-            {
-                empresas[i] = novaEmpresa;
+        Empresas novaEmpresa = new Empresas(num, CNPJ,taxa, saldo);
+        adicionarEmpresa(novaEmpresa);
+        /*for (int i = 0; i < empresas.length; i++) {
+            if (empresas[i] != null) {
                 break;
             }
-        }
-
+            empresas[i] = novaEmpresa;
+ 
+        }*/
+        
     }
 }
 
